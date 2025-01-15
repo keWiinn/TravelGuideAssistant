@@ -11,6 +11,28 @@ const PRChatbot = () => {
   const [savedStatus, setSavedStatus] = useState(""); // For save animation
   const messagesEndRef = useRef(null);
 
+  
+// Function to extract hours and minutes
+const getHoursAndMinutes = (timestamp) => {
+  // Parse the time
+  const [time, meridian] = timestamp.split(" "); // Separate time and AM/PM
+  const [hours, minutes] = time.split(":"); // Split hours and minutes
+
+  // Convert to 24-hour format if needed
+  let formattedHours = parseInt(hours, 10);
+  if (meridian === "PM" && formattedHours !== 12) {
+    formattedHours += 12;
+  } else if (meridian === "AM" && formattedHours === 12) {
+    formattedHours = 0;
+  }
+
+  return `${formattedHours}:${minutes}`; // Return hours and minutes
+};
+
+
+
+
+
   // Enhanced suggestions with more travel-focused options
   const suggestions = [
     {
@@ -155,7 +177,7 @@ const PRChatbot = () => {
       .map((msg) => `${msg.sender} (${msg.timestamp}): ${msg.text}`)
       .join("\n\n");
 
-    if (navigator.share) {
+    if (navigator.share) { 
       navigator
         .share({
           title: "Travel Guide Conversation",
@@ -221,8 +243,8 @@ const PRChatbot = () => {
               }`}
             >
               <div className="message-header">
-                <strong>{msg.sender}</strong>
-                <span className="message-time">{msg.timestamp}</span>
+                <strong>{msg.sender} </strong>
+                <span className="message-time">{getHoursAndMinutes(msg.timestamp)}</span>
               </div>
               <div className="message-content">
                 <ReactMarkdown>{msg.text}</ReactMarkdown>
