@@ -58,4 +58,21 @@ The application combines essential travel planning tools with modern technical c
 4. Open your browser and navigate to the provided local URL (usually `http://localhost:3000`).
 5. Interact with the Travel Guide Assistant to explore travel tips, plan your trip, and enjoy personalized recommendations.
 
+## Project Demo
+
+## 1. Home Menu
+
+This is the starting point where users can access the Travel Guide Assistant and other features.
+
+![Screenshot 2025-01-16 124713](https://github.com/user-attachments/assets/59638c23-f95a-491a-a255-cd363dfc7971)
+
+---
+
+## 2. Example Interaction: Nainital
+
+Here is an example of the Travel Guide Assistant responding to a query about Nainital, providing detailed information about the destination.
+
+![Screenshot 2025-01-16 124830](https://github.com/user-attachments/assets/85cc09ba-70df-4698-906b-39cb2cac967f)
+
+
 Thank You!
