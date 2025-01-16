@@ -8,35 +8,12 @@ const PRChatbot = () => {
   const [messages, setMessages] = useState([]);
   const [clickedNow, setClickedNow] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [savedStatus, setSavedStatus] = useState(""); // For save animation
+  const [savedStatus, setSavedStatus] = useState("");
   const messagesEndRef = useRef(null);
 
-  
-// Function to extract hours and minutes
-const getHoursAndMinutes = (timestamp) => {
-  // Parse the time
-  const [time, meridian] = timestamp.split(" "); // Separate time and AM/PM
-  const [hours, minutes] = time.split(":"); // Split hours and minutes
-
-  // Convert to 24-hour format if needed
-  let formattedHours = parseInt(hours, 10);
-  if (meridian === "PM" && formattedHours !== 12) {
-    formattedHours += 12;
-  } else if (meridian === "AM" && formattedHours === 12) {
-    formattedHours = 0;
-  }
-
-  return `${formattedHours}:${minutes}`; // Return hours and minutes
-};
-
-
-
-
-
-  // Enhanced suggestions with more travel-focused options
   const suggestions = [
     {
-      icon: "📅",
+      icon: "✈️",
       text: "Best time to visit",
       prompt: "What's the best time to visit Bali?",
       color: "#4facfe",
@@ -48,7 +25,7 @@ const getHoursAndMinutes = (timestamp) => {
       color: "#00f2fe",
     },
     {
-      icon: "☀️",
+      icon: "🌤️",
       text: "Weather info",
       prompt: "What's the weather like in Tokyo during spring?",
       color: "#3498db",
@@ -60,14 +37,25 @@ const getHoursAndMinutes = (timestamp) => {
       color: "#2ecc71",
     },
     {
-      icon: "🍴",
+      icon: "🍜",
       text: "Local cuisine",
       prompt: "What are must-try local dishes in Thailand?",
       color: "#e74c3c",
     },
   ];
 
-  // Scroll to bottom effect
+  const getHoursAndMinutes = (timestamp) => {
+    const [time, meridian] = timestamp.split(" ");
+    const [hours, minutes] = time.split(":");
+    let formattedHours = parseInt(hours, 10);
+    if (meridian === "PM" && formattedHours !== 12) {
+      formattedHours += 12;
+    } else if (meridian === "AM" && formattedHours === 12) {
+      formattedHours = 0;
+    }
+    return `${formattedHours}:${minutes}`;
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -76,7 +64,6 @@ const getHoursAndMinutes = (timestamp) => {
     scrollToBottom();
   }, [messages]);
 
-  // Enhanced suggestion click handler with animation
   const handleSuggestionClick = async (suggestedPrompt) => {
     setPrompt(suggestedPrompt);
     await handleSubmit({ preventDefault: () => {} }, true);
@@ -97,14 +84,10 @@ const getHoursAndMinutes = (timestamp) => {
       setClickedNow(true);
       setIsTyping(true);
 
-      // Simulate typing delay for better UX
-      const minDelay = 1000;
+      // API call
       const response = await axios.post("http://127.0.0.1:5000/prompt", {
         prompt,
       });
-
-      // Ensure minimum delay for typing indicator
-      await new Promise((resolve) => setTimeout(resolve, minDelay));
 
       const aiMessage = {
         sender: "AI",
@@ -134,7 +117,6 @@ const getHoursAndMinutes = (timestamp) => {
     }
   };
 
-  // Enhanced save conversation with animation
   const saveConversation = () => {
     const conversationData = {
       messages,
@@ -160,7 +142,6 @@ const getHoursAndMinutes = (timestamp) => {
       .toISOString()
       .slice(0, 10)}.json`;
 
-    // Show save animation
     setSavedStatus("Saving...");
     setTimeout(() => {
       link.click();
@@ -171,13 +152,12 @@ const getHoursAndMinutes = (timestamp) => {
     URL.revokeObjectURL(url);
   };
 
-  // Enhanced share with social options
   const shareConversation = () => {
     const conversationText = messages
       .map((msg) => `${msg.sender} (${msg.timestamp}): ${msg.text}`)
       .join("\n\n");
 
-    if (navigator.share) { 
+    if (navigator.share) {
       navigator
         .share({
           title: "Travel Guide Conversation",
@@ -198,34 +178,31 @@ const getHoursAndMinutes = (timestamp) => {
       <div className="prchatbot-container">
         <div className="prchatbot-header">
           <h1>Travel Guide Assistant</h1>
+          <p className="header-subtitle">Your personal travel companion</p>
           <div className="header-buttons">
             <button onClick={saveConversation}>
-              <i className="save-icon">💾</i>
+              <span>💾</span>
               {savedStatus || "Save"}
             </button>
             <button onClick={shareConversation}>
-              <i className="share-icon">📤</i>
+              <span>📤</span>
               Share
             </button>
           </div>
         </div>
 
-        <div
-          className="prchatbot-messages"
-          style={{ maxHeight: "70vh", overflowY: "auto" }}
-        >
-          {messages.length === 0 && (
+        <div className="prchatbot-messages">
+          {messages.length === 0 ? (
             <div className="prchatbot-welcome">
               <h2>Ready to Plan Your Adventure?</h2>
+              <p>Choose a topic or ask any travel-related question</p>
               <div className="prchatbot-suggestions">
                 {suggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     className="suggestion-btn"
                     onClick={() => handleSuggestionClick(suggestion.prompt)}
-                    style={{
-                      "--hover-color": suggestion.color,
-                    }}
+                    style={{ backgroundColor: suggestion.color }}
                   >
                     <span className="suggestion-icon">{suggestion.icon}</span>
                     {suggestion.text}
@@ -233,24 +210,28 @@ const getHoursAndMinutes = (timestamp) => {
                 ))}
               </div>
             </div>
+          ) : (
+            messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`prchatbot-message ${msg.sender.toLowerCase()} ${
+                  msg.isError ? "error" : ""
+                }`}
+              >
+                <div className="message-header">
+                  <strong>
+                    {msg.sender === "User" ? "You" : "Travel Assistant"}
+                  </strong>
+                  <span className="message-time">
+                    {getHoursAndMinutes(msg.timestamp)}
+                  </span>
+                </div>
+                <div className="message-content">
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
+                </div>
+              </div>
+            ))
           )}
-
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`prchatbot-message ${msg.sender.toLowerCase()} ${
-                msg.isError ? "error" : ""
-              }`}
-            >
-              <div className="message-header">
-                <strong>{msg.sender} </strong>
-                <span className="message-time">{getHoursAndMinutes(msg.timestamp)}</span>
-              </div>
-              <div className="message-content">
-                <ReactMarkdown>{msg.text}</ReactMarkdown>
-              </div>
-            </div>
-          ))}
 
           {isTyping && (
             <div className="typing-indicator">
@@ -262,7 +243,7 @@ const getHoursAndMinutes = (timestamp) => {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="prchatbot-input">
+        <form className="prchatbot-input" onSubmit={handleSubmit}>
           <input
             type="text"
             value={prompt}
@@ -272,13 +253,13 @@ const getHoursAndMinutes = (timestamp) => {
             disabled={clickedNow}
           />
           <button
+            type="submit"
             className="prchatbot-send-btn"
-            onClick={handleSubmit}
             disabled={clickedNow || !prompt.trim()}
           >
-            <span className="send-icon">📤</span>
+            Send
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
