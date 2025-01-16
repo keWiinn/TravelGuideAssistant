@@ -1,209 +1,274 @@
+/* PRChatbot.css */
+
 .prchatbot-app-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: #f7f9fc;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .prchatbot-container {
   width: 100%;
-  max-width: 800px;
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+  max-width: 56rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
+/* Header Styles */
 .prchatbot-header {
-  background: linear-gradient(90deg, #1da1f2 0%, #00d2ff 100%);
-  padding: 28px 32px;
-  position: relative;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  padding: 1.5rem;
 }
 
 .prchatbot-header h1 {
   color: white;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: bold;
   margin: 0;
 }
 
+.header-subtitle {
+  color: #bfdbfe;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
 .header-buttons {
-  position: absolute;
-  right: 32px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
-  gap: 12px;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .header-buttons button {
-  background: white;
-  border: none;
-  color: #1da1f2;
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .header-buttons button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
+/* Messages Container */
+.prchatbot-messages {
+  height: 60vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.prchatbot-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.prchatbot-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.prchatbot-messages::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* Welcome Section */
 .prchatbot-welcome {
   text-align: center;
-  padding: 48px 32px;
+  padding: 2rem 0;
 }
 
 .prchatbot-welcome h2 {
-  font-size: 2.2rem;
-  color: #00d2ff;
-  margin-bottom: 40px;
-  font-weight: 700;
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
+.prchatbot-welcome p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+/* Suggestions Grid */
 .prchatbot-suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  padding: 0.5rem;
 }
 
 .suggestion-btn {
-  background: white;
-  border: none;
-  border-radius: 16px;
-  padding: 16px 24px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #2c3e50;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  color: white;
   font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
 }
 
 .suggestion-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 
 .suggestion-icon {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
-.prchatbot-messages {
-  padding: 24px;
+/* Message Bubbles */
+.prchatbot-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin-bottom: 1rem;
+}
+
+.prchatbot-message.user {
+  margin-left: auto;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.message-time {
+  color: #6b7280;
+  font-size: 0.75rem;
 }
 
 .message-content {
-  margin-top: 8px;
-  line-height: 1.6;
-  color: #1a1a1a;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
 }
 
-.prchatbot-input {
-  padding: 24px 32px;
-  background: white;
-  border-top: 1px solid #e8eef4;
+.user .message-content {
+  background-color: #2563eb;
+  color: white;
+  border-top-right-radius: 0;
+}
+
+.ai .message-content {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  border-top-left-radius: 0;
+}
+
+/* Typing Indicator */
+.typing-indicator {
   display: flex;
-  gap: 16px;
+  gap: 0.5rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #9ca3af;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Input Area */
+.prchatbot-input {
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .prchatbot-input input {
   flex: 1;
-  padding: 16px 24px;
-  border: 1px solid #e8eef4;
-  border-radius: 100px;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  background: #f7f9fc;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background-color: #f9fafb;
+  transition: all 0.2s;
 }
 
 .prchatbot-input input:focus {
   outline: none;
-  border-color: #1da1f2;
-  box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.1);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
-.prchatbot-input input::placeholder {
-  color: #94a3b8;
+.prchatbot-input input:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
 }
 
 .prchatbot-send-btn {
-  background: #1da1f2;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 0.75rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s;
 }
 
-.prchatbot-send-btn:hover {
-  background: #00d2ff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.prchatbot-send-btn:hover:not(:disabled) {
+  background-color: #1d4ed8;
 }
 
 .prchatbot-send-btn:disabled {
-  background: #e8eef4;
+  opacity: 0.5;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
 }
 
-@media (max-width: 768px) {
-  .prchatbot-container {
-    border-radius: 20px;
-    margin: 12px;
-  }
+/* Error Message */
+.prchatbot-message.error .message-content {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
 
-  .prchatbot-header {
-    padding: 24px 20px;
+/* Responsive Design */
+@media (max-width: 640px) {
+  .prchatbot-suggestions {
+    grid-template-columns: 1fr;
   }
-
-  .prchatbot-header h1 {
-    font-size: 2rem;
+  
+  .prchatbot-message {
+    max-width: 90%;
   }
-
+  
   .header-buttons {
-    right: 20px;
-  }
-
-  .header-buttons button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-
-  .prchatbot-welcome h2 {
-    font-size: 1.8rem;
-  }
-
-  .suggestion-btn {
-    padding: 12px 20px;
-  }
-
-  .prchatbot-input {
-    padding: 20px;
+    flex-wrap: wrap;
   }
 }
-
-
-
