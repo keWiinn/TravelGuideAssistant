@@ -1,16 +1,24 @@
 # Travel Guide Assistant
 
 ## Overview
-Travel Guide Assistant is a user-friendly platform designed to help travelers plan their adventures seamlessly. It offers the following features:
-- **Best time to visit:** Discover the ideal time to visit your destination.
-- **Budget planning:** Plan your trip finances with ease.
-- **Weather info:** Get accurate weather forecasts.
-- **Packing tips:** Receive recommendations on what to pack.
-- **Local cuisine:** Explore popular dishes and culinary experiences.
+Travel Guide Assistant is a comprehensive travel planning platform that combines artificial intelligence with user-friendly interfaces to create seamless travel experiences. The platform serves as your personal travel companion, offering detailed insights and recommendations for every aspect of your journey. Whether you're planning a weekend getaway or an extended international trip, our assistant provides tailored guidance to ensure your travel plans are well-organized and thorough.
 
-The site provides an interactive interface, as depicted in the image above, to make travel planning simple and enjoyable.
+Key aspects of the platform include personalized recommendations based on your travel preferences, real-time updates for weather and local conditions, and comprehensive budget management tools. The assistant learns from user interactions to provide increasingly accurate and relevant suggestions, making each subsequent trip planning experience more efficient and enjoyable.
 
----
+## Features Overview
+The application combines essential travel planning tools with modern technical capabilities:
+
+### Core Features
+- **Interactive UI & AI Assistance:** Modern interface powered by Google's generative AI for smart, personalized recommendations
+- **Cross-Platform Compatibility:** Responsive design that works seamlessly across all devices
+- **Secure Integration:** Reliable cross-origin resource sharing between frontend and backend
+
+### Travel Planning Tools
+- **Best Time to Visit:** Seasonal analysis and event calendars
+- **Budget Planning:** Cost estimates and currency conversion
+- **Weather Information:** Forecasts and seasonal insights
+- **Packing Tips:** Customized lists based on destination
+- **Local Cuisine:** Restaurant and dish recommendations
 
 ## Installation and Setup Instructions
 
@@ -43,20 +51,11 @@ The site provides an interactive interface, as depicted in the image above, to m
    npm start
    ```
 
----
-
 ## How to Use
-1. Run the backend server as described in the **Backend Setup** section.
-2. Start the React frontend application as outlined in the **Frontend Setup** section.
-3. Open your browser and navigate to the provided local URL (usually `http://localhost:3000`).
-4. Interact with the Travel Guide Assistant to explore travel tips, plan your trip, and enjoy personalized recommendations.
+1. Obtain a Google AI API key from the Google Cloud Console and add it to `chat-b-main/backend/app.py` on line 9.
+2. Run the backend server as described in the **Backend Setup** section.
+3. Start the React frontend application as outlined in the **Frontend Setup** section.
+4. Open your browser and navigate to the provided local URL (usually `http://localhost:3000`).
+5. Interact with the Travel Guide Assistant to explore travel tips, plan your trip, and enjoy personalized recommendations.
 
----
-
-## Features Overview
-The application includes the following capabilities:
-- **Interactive UI:** Smooth navigation for planning every aspect of your trip.
-- **AI Assistance:** Leverages Google’s generative AI for enhanced recommendations and insights.
-- **Cross-Origin Resource Sharing:** Ensures seamless communication between the backend and frontend using Flask-CORS.
-
-Feel free to contribute to this project or customize it for your travel needs!
+Thank You!
